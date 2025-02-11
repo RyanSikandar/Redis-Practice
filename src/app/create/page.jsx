@@ -8,6 +8,7 @@ export default function Create() {
 
   async function handleSubmit(formData) {
     const result = await createBook(formData)
+    window.location.href = '/'
 
     if (result?.error) {
       setError(result.error)
