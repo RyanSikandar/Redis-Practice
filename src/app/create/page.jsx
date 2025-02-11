@@ -1,17 +1,21 @@
 'use client'
 
 import { createBook } from '@/app/actions/create'
+import { useRouter } from 'next/navigation'
 import { useState } from "react"
 
 export default function Create() {
   const [error, setError] = useState('')
+  const router = useRouter()
+
 
   async function handleSubmit(formData) {
     const result = await createBook(formData)
-    window.location.href = '/'
-
     if (result?.error) {
       setError(result.error)
+    }
+    if (result.success) {
+      router.push(result.redirectTo)
     }
   }
 
